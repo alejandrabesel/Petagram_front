@@ -33,7 +33,7 @@ export default function ModalLayout({
         </main>
 
         <div className="flex w-full justify-around p-6 text-white">
-          <ButtonMd danger text={"Cancelar"} md onClick={handleClickClose} md />
+          <ButtonMd danger text={"Cancelar"} md onClick={handleClickClose} />
 
           <ButtonMd md onClick={handleClick} text={textButton} />
         </div>
