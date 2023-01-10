@@ -3,6 +3,11 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        title: ['"Cormorant Garamond"', "serif"],
+        subtitle: ["Lato", "sans-serif"],
+        body: ["Roboto", "sans-serif"],
+      },
       colors: {
         primary_50: "#F8E5FF",
         primary_100: "#E9B3FF",
