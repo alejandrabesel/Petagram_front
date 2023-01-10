@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
  *
  * @returns ReacComponents
  */
-export default function ({ sm, md, lg, xl }) {
+export default function Loading({ sm, md, lg, xl }) {
   const [size, setSize] = useState("");
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function ({ sm, md, lg, xl }) {
   }, []);
 
   return (
-    <div className="my-2 flex w-full justify-center rounded-md  border border-red-500 bg-white  px-4 py-5 text-center shadow sm:rounded-lg">
+    <div className="my-2 flex w-full justify-center rounded-md  bg-white  px-4 py-5 text-center shadow sm:rounded-lg">
       <a className="bg-white">
         <img src="/loading.svg" alt="loading..." width={size} height="100" />
       </a>
