@@ -44,8 +44,8 @@ export default function () {
   useEffect(() => {}, []);
   return (
     <div className="grid  w-full grid-cols-1 justify-center gap-4 p-2  md:grid-cols-2 lg:grid-cols-3">
-      {cards.map((e) => (
-        <Card key={e.title} title={e.title} image={e.url} />
+      {cards.map((e, index) => (
+        <Card key={index} title={e.title} image={e.url} />
       ))}
     </div>
   );
