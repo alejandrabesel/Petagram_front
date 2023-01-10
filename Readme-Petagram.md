@@ -26,7 +26,7 @@ Seleccione Prettier - **Code Formatter.**
 
 ![imagen](https://assets.digitalocean.com/articles/how-to-format-code-with-prettier-in-visual-studio-code/prettier4.png)
 
-Presione `CTRL +` para abrir el menu **Settigns**. Una vez abierto el menú, **Editor:Format On Save** y asegurese que la opcion esta seleccionada
+Presione `CTRL + ,` para abrir el menu **Settigns**. Una vez abierto el menú, **Editor:Format On Save** y asegurese que la opcion esta seleccionada
 
 ![imagen](https://assets.digitalocean.com/articles/how-to-format-code-with-prettier-in-visual-studio-code/prettier5.png)
 
