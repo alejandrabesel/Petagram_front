@@ -6,6 +6,8 @@ export const GET_POSTS_BY_PET_ID = "GET_POSTS_BY_PET_ID";
 export const CREATE_POST = "CREATE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
+export const ADD_REACTIONS = "ADD_REACTIONS";
+export const ADD_COMMENT = "ADD_COMMENT";
 
 export const GET_ALL_PETS = "GET_ALL_PETS";
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
@@ -79,6 +81,28 @@ export const deletePost = (id)=>{
             console.log(error);
             return alert("Error deleting post")
         }
+    }
+};
+
+export const addReactions = (id, payload)=> async(dispatch)=>{
+    try {
+        console.log(payload)
+        await axios.put(`${URL}post/reaction/${id}`, payload);
+        return dispatch({type: ADD_REACTIONS});
+    }catch(error){
+        console.log (error)
+        return alert("Error adding reactions")
+    }
+};
+
+export const addComment = (id, payload)=> async(dispatch)=>{
+    try {
+        console.log(payload)
+        await axios.put(`${URL}post/comment/${id}`, payload);
+        return dispatch({type: ADD_COMMENT});
+    }catch(error){
+        console.log (error)
+        return alert("Error adding comment")
     }
 };
 
