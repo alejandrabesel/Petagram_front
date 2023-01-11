@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import Card from "./Card/Card";
+import { getPosts } from "../../redux/actions/postActions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function () {
   //const [cards, setCards] = useState([]);
+  const posts = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
   const cards = [
     {
       title: "Titulo de Imagen",
@@ -41,7 +45,9 @@ export default function () {
       url: "https://cdn2.thedogapi.com/images/dW5UucTIW.jpg",
     },
   ];
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(getPosts());
+  }, []);
   return (
     <div className="grid  w-full grid-cols-1 justify-center gap-4 p-2  md:grid-cols-2 lg:grid-cols-3">
       {cards.map((e, index) => (
