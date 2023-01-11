@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Card from "./Card/Card";
 
-export default function () {
+export default function Cards({ noTitle }) {
   //const [cards, setCards] = useState([]);
   const cards = [
     {
@@ -45,7 +45,7 @@ export default function () {
   return (
     <div className="grid  w-full grid-cols-1 justify-center gap-4 p-2  md:grid-cols-2 lg:grid-cols-3">
       {cards.map((e, index) => (
-        <Card key={index} title={e.title} image={e.url} />
+        <Card key={index} title={noTitle ? false : e.title} image={e.url} />
       ))}
     </div>
   );
