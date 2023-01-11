@@ -7,11 +7,14 @@ import {
   RiSearchLine,
   RiAddBoxLine,
   RiUser3Line,
+  RiLogoutBoxRLine,
 } from "react-icons/ri";
 import { FiHeart } from "react-icons/fi";
 import Tab from "./components/Tab";
+import { useAuth0 } from "@auth0/auth0-react";
 export default function SideBar() {
   const [showMenu, setShowMenu] = useState(false);
+  const { isAuthenticated, logout } = useAuth0();
   return (
     <div
       className={`md:left-0 ${
@@ -50,6 +53,11 @@ export default function SideBar() {
             <Tab title={"Panel de Usuario"}>
               <RiUser3Line className="text-2xl" />
             </Tab>
+            {isAuthenticated && (
+              <Tab title={"Log Out"} handleClick={() => logout()}>
+                <RiLogoutBoxRLine className="text-2xl" />
+              </Tab>
+            )}
           </div>
         </div>
       </div>
