@@ -134,6 +134,7 @@ export default function SideBar() {
           title="Tus mascotas"
           subtitle={"Seleccione el perfil de mascota que desea acceder"}
           handleClick={confirmPetLogged}
+          handleClickClose={openCloseModalPerfil}
         >
           <div className="h-full w-full">
             {pets.length !== 0 && (
