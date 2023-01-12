@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Card from "./Card/Card";
 import { getPosts } from "../../redux/actions/postActions";
 import { useDispatch, useSelector } from "react-redux";

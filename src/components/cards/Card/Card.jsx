@@ -4,9 +4,9 @@ export default function Card({ title, image }) {
       <img
         src={image}
         className=" rounded-lg object-cover md:h-44 md:w-44 lg:h-72 lg:w-72"
-        alt="image"
+        alt=""
       />
-      <h1 className="font-subtitle text-primary_700">{title}</h1>
+      {title && <h1 className="font-subtitle text-primary_700">{title}</h1>}
     </div>
   );
 }
