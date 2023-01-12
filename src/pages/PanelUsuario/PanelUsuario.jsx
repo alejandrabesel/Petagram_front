@@ -4,52 +4,31 @@ import Tab from "../../components/layout/SideBar/components/Tab";
 import { BsGear } from "react-icons/bs";
 import { IoPawOutline } from "react-icons/io5";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function PanelUsuario() {
-  const auxUser = {
-    id: 1,
-    name: "Fabi",
-    email: "fabi@mail.com",
-    createdAt: "2023-01-12T09:48:44.394Z",
-    updatedAt: "2023-01-12T09:48:44.394Z",
-    adminId: null,
-  };
-  const auxPets = [
-    {
-      id: 2,
-      name: "pucca",
-      age: 2,
-      image:
-        "https://thumbs.dreamstime.com/b/gray-fluffy-cat-blue-eyes-shot-close-up-square-image-173304539.jpg",
-      looking_partner: false,
-      gender: null,
-      updatedAt: "2023-01-12T09:55:44.773Z",
-      createdAt: "2023-01-12T09:55:44.591Z",
-      userId: 1,
-      raceId: 1,
-    },
-    {
-      id: 2,
-      name: "garu",
-      age: 3,
-      image:
-        "https://as1.ftcdn.net/v2/jpg/01/63/11/70/1000_F_163117064_syJkTuCddASYjvl4WqyRmnuy8cDXpoQY.jpg",
-      looking_partner: false,
-      gender: null,
-      updatedAt: "2023-01-12T09:55:44.773Z",
-      createdAt: "2023-01-12T09:55:44.591Z",
-      userId: 1,
-      raceId: 1,
-    },
-  ];
+  // const auxUser = {
+  //   id: 1,
+  //   name: "Fabi",
+  //   email: "fabi@mail.com",
+  //   createdAt: "2023-01-12T09:48:44.394Z",
+  //   updatedAt: "2023-01-12T09:48:44.394Z",
+  //   adminId: null,
+  // };
+
   const [currentTab, setCurrentTab] = useState(1);
+  const { pets, userLogged } = useSelector((state) => state.user);
   const [inputs, setInputs] = useState({
-    name: auxUser.name,
-    email: auxUser.email,
+    name: userLogged.name,
+    email: userLogged.email,
   });
+
   const [allowEdit, setAllowEdit] = useState(false);
 
+  // useEffect(()=>{
+
+  // }, [userLogged])
   return (
     <Layout>
       <NavBar />
@@ -110,8 +89,8 @@ export default function PanelUsuario() {
           {currentTab === 2 && (
             <div className="flex w-9/12 flex-col items-center gap-2 text-neutral-800">
               <div className="flex w-11/12 flex-col items-center gap-2 rounded-xl bg-neutral-200 py-2">
-                {auxPets.length > 0 ? (
-                  auxPets.map((pet) => (
+                {pets.length > 0 ? (
+                  pets.map((pet) => (
                     <div className="flex w-64 justify-between rounded-xl bg-primary_200 p-2 text-white">
                       <div className="flex items-center gap-3">
                         <img
