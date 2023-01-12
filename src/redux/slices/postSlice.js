@@ -6,8 +6,8 @@ export const postsSlice = createSlice({
     posts: [],
     petPosts: [],
     post: {},
-    reactions: [],
-    comments:[]
+    // reactions: [],
+    // comments:[]
   },
   reducers: {
     getAllPosts: (state, action) => {
