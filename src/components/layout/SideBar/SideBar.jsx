@@ -1,5 +1,5 @@
 // import { logo } from "../../../../public/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   RiCloseCircleFill,
   RiMenuLine,
@@ -12,9 +12,40 @@ import {
 import { FiHeart } from "react-icons/fi";
 import Tab from "./components/Tab";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserLogged } from "../../../redux/actions/userActions";
+import ModalLayout from "../../modals/ModalLaout/ModalLayout";
+import CardsPet from "./components/CardsPet";
 export default function SideBar() {
   const [showMenu, setShowMenu] = useState(false);
-  const { isAuthenticated, logout } = useAuth0();
+  const { isAuthenticated, logout, user } = useAuth0();
+  const { userLogged, pets } = useSelector((state) => state.user);
+  //mascota perfil activo
+  const [petLogged, setPetLogged] = useState(null);
+  const [showModalPerfil, setShowModalPerfil] = useState(false);
+  const dispatch = useDispatch();
+  //pet seleccionado en el modal
+  const [petSelectedModal, setPetSelectedModal] = useState(null);
+  const selectPetModal = (pet) => {
+    setPetSelectedModal(pet);
+  };
+
+  const confirmPetLogged = () => {
+    setPetLogged(petSelectedModal);
+    openCloseModalPerfil();
+  };
+  useEffect(() => {
+    isAuthenticated &&
+      dispatch(getUserLogged({ name: user.name, email: user.email }));
+  }, [user]);
+
+  useEffect(() => {
+    setPetLogged(pets[0]);
+  }, [userLogged, pets]);
+
+  const openCloseModalPerfil = () => {
+    setShowModalPerfil(!showModalPerfil);
+  };
   return (
     <div
       className={`md:left-0 ${
@@ -43,13 +74,31 @@ export default function SideBar() {
             </Tab>
           </div>
           <div className="flex flex-col gap-4 pb-4">
-            <Tab titleSize="xl" title={"Perfil"}>
-              <img
-                src="./perfil.jpg"
-                className="h-8 w-9 rounded-full border border-primary_700 object-cover"
-                alt="perfil"
-              />
-            </Tab>
+            {/* ############ perfil de mascota #####################  */}
+            {isAuthenticated ? (
+              petLogged && (
+                <Tab
+                  titleSize="xl"
+                  title={petLogged.name}
+                  handleClick={openCloseModalPerfil}
+                >
+                  <img
+                    src={petLogged.image}
+                    className="h-8 w-9 rounded-full border border-primary_700 object-cover"
+                    alt="perfil"
+                  />
+                </Tab>
+              )
+            ) : (
+              <Tab titleSize="xl" title={"Perfil"}>
+                <img
+                  src="./perfil.jpg"
+                  className="h-8 w-9 rounded-full border border-primary_700 object-cover"
+                  alt="perfil"
+                />
+              </Tab>
+            )}
+
             <Tab titleSize="xl" path="/PanelUsuario" title={"Panel de Usuario"}>
               <RiUser3Line className="text-2xl" />
             </Tab>
@@ -79,6 +128,24 @@ export default function SideBar() {
           )}
         </button>
       </div>
+      {showModalPerfil && (
+        <ModalLayout
+          textButton="Elegir"
+          title="Tus mascotas"
+          subtitle={"Seleccione el perfil de mascota que desea acceder"}
+          handleClick={confirmPetLogged}
+        >
+          <div className="h-full w-full">
+            {pets.length !== 0 && (
+              <CardsPet
+                pets={pets}
+                selectPetModal={selectPetModal}
+                petSelectedModal={petSelectedModal}
+              />
+            )}
+          </div>
+        </ModalLayout>
+      )}
     </div>
   );
 }

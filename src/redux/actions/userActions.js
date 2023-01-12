@@ -1,5 +1,13 @@
+import { createNextState } from "@reduxjs/toolkit";
 import axios from "axios";
-import {getUsers, userByID, postUser, putUser, deletUser} from "./../slices/userSlice"
+import { useEffect } from "react";
+import {
+  getUser,
+  userByID,
+  postUser,
+  putUser,
+  deletUser,
+} from "./../slices/userSlice";
 
 const URL = "http://localhost:3001/";
 
@@ -16,55 +24,73 @@ const URL = "http://localhost:3001/";
 //     .catch((e) => console.log(e.message));
 // };
 
-export const getAllUsers = ()=>{
-  return async (dispatch)=>{
-      const json = await axios.get(`${URL}user`);
-      return dispatch (getUsers(json.data));
-  }
+// export const getAllUsers = () => {
+//   return async (dispatch) => {
+//     const json = await axios.get(`${URL}user`);
+//     return dispatch(getUsers(json.data));
+//   };
+// };
+
+export const getUserLogged = (user) => {
+  return async (dispatch) => {
+    try {
+      const userlog = await axios
+        .post(`${URL}user/byEmail`, user)
+        .then((res) => res.data);
+      const pets = await axios
+        .get(`${URL}pet/byUser/${userlog.id}`)
+        .then((res) => res.data);
+      const payload = {};
+      payload.user = userlog;
+      payload.pets = pets;
+      return dispatch(getUser(payload));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 };
 
-export const getUserById = (id)=>{
-  return async (dispatch)=>{
-      try {
-          const json = await axios.get(`${URL}user/${id}`);
-          return dispatch (userByID(json.data));
-      } catch (error){
-          console.log(error);
-      }
-  }
+export const getUserById = (id) => {
+  return async (dispatch) => {
+    try {
+      const json = await axios.get(`${URL}user/${id}`);
+      return dispatch(userByID(json.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 
-export const createUser = (payload)=> async (dispatch)=>{
-  try{
-      console.log(payload)
-      await axios.post(`${URL}user`, payload);
-      return dispatch (postUser());
-  }catch (error){
-      console.log (error)
-      return alert ("User not created");
-  }
-};
-
-export const updateUser = (id, payload)=> async(dispatch)=>{
+export const createUser = (payload) => async (dispatch) => {
   try {
-      console.log(payload)
-      await axios.patch(`${URL}user/${id}`, payload);
-      return dispatch(putUser());
-  }catch(error){
-      console.log (error)
-      return alert("Error updating user")
+    console.log(payload);
+    await axios.post(`${URL}user`, payload);
+    return dispatch(postUser());
+  } catch (error) {
+    console.log(error);
+    return alert("User not created");
   }
 };
 
-export const deleteUser = (id)=>{
-  return async (dispatch)=>{
-      try{
-          await axios.delete(`${URL}user/${id}`);
-          return dispatch (deletUser());
-      }catch (error){
-          console.log(error);
-          return alert("Error deleting user")
-      }
+export const updateUser = (id, payload) => async (dispatch) => {
+  try {
+    console.log(payload);
+    await axios.patch(`${URL}user/${id}`, payload);
+    return dispatch(putUser());
+  } catch (error) {
+    console.log(error);
+    return alert("Error updating user");
   }
 };
 
+export const deleteUser = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${URL}user/${id}`);
+      return dispatch(deletUser());
+    } catch (error) {
+      console.log(error);
+      return alert("Error deleting user");
+    }
+  };
+};

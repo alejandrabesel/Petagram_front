@@ -9,7 +9,7 @@ export default function ModalLayout({
   subtitle,
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.3)] font-body">
       <div className="relative flex h-[500px] w-[450px] flex-col items-center justify-between rounded-lg bg-white p-4">
         <div className="absolute top-2 right-2">
           <button onClick={handleClickClose}>
@@ -24,8 +24,10 @@ export default function ModalLayout({
           </button>
         </div>
         <div className="flex flex-col gap-2 py-2 text-center">
-          <h1 className="text-3xl font-bold text-primary_500">{title}</h1>
-          <p className="text-xl ">{subtitle}</p>
+          <h1 className="font-title text-4xl font-bold text-primary_500">
+            {title}
+          </h1>
+          <p className="font-subtitle text-lg text-neutral-600">{subtitle}</p>
         </div>
 
         <main className="flex h-3/5 w-5/6 items-center justify-center rounded-xl">
