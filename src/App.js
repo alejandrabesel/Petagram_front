@@ -5,6 +5,7 @@ import About from "./pages/About/About";
 import NotFound from "./pages/NotFound/NotFound";
 import Landing from "./pages/Landing/Landing";
 import Busqueda from "./pages/Busqueda/Busqueda";
+import PanelUsuario from "./pages/PanelUsuario/PanelUsuario";
 function App() {
   return (
     <div className="App text-center font-body">
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Busqueda" element={<Busqueda />} />
+        <Route path="/PanelUsuario" element={<PanelUsuario />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
