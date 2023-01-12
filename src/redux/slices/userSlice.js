@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    users:[],
-    user: {},
+    users: [],
+    userLogged: {},
     pets: [],
   },
   reducers: {
-    getUsers: (state, action) => {
-      state.users = action.payload.users;
+    getUser: (state, action) => {
+      state.userLogged = action.payload.user;
       state.pets = action.payload.pets;
     },
     userByID: (state, action) => {
@@ -31,5 +31,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { getUsers, userByID, postUser, putUser, deletUser } = userSlice.actions;
+export const { getUser, userByID, postUser, putUser, deletUser } =
+  userSlice.actions;
 export default userSlice.reducer;
