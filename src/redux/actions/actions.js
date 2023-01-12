@@ -11,7 +11,7 @@ export const ADD_COMMENT = "ADD_COMMENT";
 
 export const GET_ALL_PETS = "GET_ALL_PETS";
 export const GET_PET_BY_ID = "GET_PET_BY_ID";
-export const GET_PET_LOOKING_PARTNER = "ET_PET_LOOKING_PARTNER";
+export const GET_PET_LOOKING_PARTNER = "GET_PET_LOOKING_PARTNER";
 export const CREATE_PET = "CREATE_PET";
 export const UPDATE_PET = "UPDATE_PET";
 export const DELETE_PET= "DELETE_PET";
