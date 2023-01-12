@@ -1,6 +1,12 @@
 import axios from "axios";
-import { getAllPosts, getPostById, postPost, reactions,comments } from "../slices/postSlice";
-const URL = "http://localhost:4000/";
+import {
+  getAllPosts,
+  getPostById,
+  postPost,
+  reactions,
+  comments,
+} from "../slices/postSlice";
+const URL = "http://localhost:3001/";
 
 // const URL = process.env.REACT_APP_URL_API;
 
@@ -12,53 +18,53 @@ const URL = "http://localhost:4000/";
 //     .catch((e) => console.log(e.message));
 // };
 
-export const getPosts = ()=>{
-  return async (dispatch)=>{
-      const json = await axios.get(`${URL}post`);
-      return dispatch(getAllPosts(json.data));
-  }
+export const getPosts = () => {
+  return async (dispatch) => {
+    const json = await axios.get(`${URL}post`);
+    return dispatch(getAllPosts(json.data));
+  };
 };
 
-export const getPostsByPetId = (petId)=>{
-  return async (dispatch)=>{
-      try {
-          const json = await axios.get(`${URL}post/${petId}`);
-          return dispatch (getPostById(json.data));
-      } catch (error){
-          console.log(error);
-      }
-  }
+export const getPostsByPetId = (petId) => {
+  return async (dispatch) => {
+    try {
+      const json = await axios.get(`${URL}post/${petId}`);
+      return dispatch(getPostById(json.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 
-export const createPost = (petId, payload)=> async (dispatch)=>{
-  try{
-      console.log(payload)
-      await axios.post(`${URL}post/${petId}`, payload);
-      return dispatch (postPost());
-  }catch (error){
-      console.log (error)
-      return alert ("Post not created");
-  }
-};
-
-export const addReactions = (id, payload)=> async(dispatch)=>{
+export const createPost = (petId, payload) => async (dispatch) => {
   try {
-      console.log(payload)
-      await axios.put(`${URL}post/reaction/${id}`, payload);
-      return dispatch(reactions());
-  }catch(error){
-      console.log (error)
-      return alert("Error adding reactions")
+    console.log(payload);
+    await axios.post(`${URL}post/${petId}`, payload);
+    return dispatch(postPost());
+  } catch (error) {
+    console.log(error);
+    return alert("Post not created");
   }
 };
 
-export const addComment = (id, payload)=> async(dispatch)=>{
+export const addReactions = (id, payload) => async (dispatch) => {
   try {
-      console.log(payload)
-      await axios.put(`${URL}post/comment/${id}`, payload);
-      return dispatch(comments());
-  }catch(error){
-      console.log (error)
-      return alert("Error adding comment")
+    console.log(payload);
+    await axios.put(`${URL}post/reaction/${id}`, payload);
+    return dispatch(reactions());
+  } catch (error) {
+    console.log(error);
+    return alert("Error adding reactions");
+  }
+};
+
+export const addComment = (id, payload) => async (dispatch) => {
+  try {
+    console.log(payload);
+    await axios.put(`${URL}post/comment/${id}`, payload);
+    return dispatch(comments());
+  } catch (error) {
+    console.log(error);
+    return alert("Error adding comment");
   }
 };
