@@ -13,11 +13,10 @@ const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 root.render(
   <React.StrictMode>
-
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={window.location.origin}
+      redirectUri={"http://localhost:3000/home"}
     >
       <Provider store={store}>
         <BrowserRouter>
@@ -25,7 +24,6 @@ root.render(
         </BrowserRouter>
       </Provider>
     </Auth0Provider>
-
   </React.StrictMode>
 );
 
