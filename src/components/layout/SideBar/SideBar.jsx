@@ -29,32 +29,36 @@ export default function SideBar() {
         />
         <div className="flex h-full flex-col justify-between border-r-2 border-primary_700  ">
           <div className="flex flex-col gap-4">
-            <Tab title={"Home"}>
+            <Tab titleSize="xl" title={"Home"}>
               <RiHome3Line className="text-3xl " />
             </Tab>
-            <Tab title={"Busqueda"}>
+            <Tab titleSize="xl" path="/Busqueda" title={"Busqueda"}>
               <RiSearchLine className="text-3xl" />
             </Tab>
-            <Tab title={"Notificationes"}>
+            <Tab titleSize="xl" title={"Notificationes"}>
               <FiHeart className="text-3xl" />
             </Tab>
-            <Tab title={"Post"}>
+            <Tab titleSize="xl" title={"Post"}>
               <RiAddBoxLine className="text-3xl" />
             </Tab>
           </div>
           <div className="flex flex-col gap-4 pb-4">
-            <Tab title={"Perfil"}>
+            <Tab titleSize="xl" title={"Perfil"}>
               <img
                 src="./perfil.jpg"
                 className="h-8 w-9 rounded-full border border-primary_700 object-cover"
                 alt="perfil"
               />
             </Tab>
-            <Tab title={"Panel de Usuario"}>
+            <Tab titleSize="xl" path="/PanelUsuario" title={"Panel de Usuario"}>
               <RiUser3Line className="text-2xl" />
             </Tab>
             {isAuthenticated && (
-              <Tab title={"Log Out"} handleClick={() => logout()}>
+              <Tab
+                titleSize="xl"
+                title={"Log Out"}
+                handleClick={() => logout()}
+              >
                 <RiLogoutBoxRLine className="text-2xl" />
               </Tab>
             )}
